@@ -1,11 +1,11 @@
 class neutron_qos (
   $qos_plugin = 'neutron.services.qos.qos_plugin.QosPlugin',
-  $node_role  = undef,
+  $roles  = [],
 ) {
 
   include neutron_qos::params
 
-  if $node_role == 'controller' or $node_role == 'primary-controller' {
+  if 'controller' in $roles or 'primary-controller' in $roles {
 
     service { $neutron_qos::params::server_service:
       ensure => running,
